@@ -29,7 +29,14 @@ export const Registration = () => {
         <input
           type="email"
           value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
+          onChange={(e) => {
+            const index = user.email.indexOf('@');
+            setUser({
+              ...user,
+              email: e.target.value,
+              username: user.email.slice(0, index),
+            });
+          }}
         />
       </label>
       <br />
