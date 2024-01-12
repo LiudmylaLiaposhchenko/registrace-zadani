@@ -13,9 +13,7 @@ export const Registration = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(user);
         setUser({
-          ...user,
           username: '',
           email: '',
           password: '',
@@ -31,10 +29,12 @@ export const Registration = () => {
           value={user.email}
           onChange={(e) => {
             const index = user.email.indexOf('@');
+
             setUser({
               ...user,
               email: e.target.value,
-              username: user.email.slice(0, index),
+              username:
+                index >= 0 ? e.target.value.slice(0, index) : e.target.value,
             });
           }}
         />
@@ -54,6 +54,7 @@ export const Registration = () => {
         <input
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
+          type="password"
         />
       </label>
       <br />
@@ -64,6 +65,7 @@ export const Registration = () => {
           onChange={(e) =>
             setUser({ ...user, passwordConfirm: e.target.value })
           }
+          type="password"
         />
       </label>
       <button type="submit">REGISTER</button>
